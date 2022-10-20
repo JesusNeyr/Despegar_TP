@@ -6,6 +6,7 @@ from tokenize import Number
 
 fecha_anio_actual=date.strftime(date.today(), "%Y")
 dia =date.strftime(date.today(), "%Y-%m-%d")
+
 productos = [
   {
     "codigo": 100,
@@ -36,6 +37,7 @@ productos = [
     "stock": 2
   }
 ]
+
 ventas = [
     {
     "codigo_producto": 103,
@@ -74,7 +76,6 @@ producto_nuevo={
     "nombre": "short talle xxxx",
     "categoria": "remera",
     "precio": 5000,
-    "stock": 2
   }
 
 
@@ -86,10 +87,6 @@ def lista_de_codigos_productos(productos):
         
         [codigos.append(producto["codigo"]) for producto in productos]
         
-    else:
-        
-        raise ValueError("sin productos")
-    
     return sorted(codigos,reverse=True)
 
 def lista_de_codigos_ventas(ventas):
@@ -117,11 +114,6 @@ def posicion_de_elemento_en_productos(codigo_de_producto):
 def registrar_producto(producto_nuevo):
     
     global productos
-
-    # if len(productos)==0:
-    #     producto_nuevo["stock"] = 0 
-    #     productos.append(producto_nuevo)
-    # else:
 
     lista_codigos_de_productos=lista_de_codigos_productos(productos)
     for producto in productos:
@@ -317,7 +309,7 @@ def actualizar_precios_por_categoria(categoria, porcentaje):
                 producto["precio"] += producto["precio"]* porcentaje/100
     else:
 
-        raise ValueError("Pocentaje no recibe cadena de texto, solo numeros")
+        raise ValueError("Porcentaje no recibe cadena de texto, solo numeros")
 
 
 def cargar_producto(un_producto):
@@ -362,4 +354,4 @@ class Estado:
         global productos
         for count in range(0, len(self.productos)):
             if self.productos[count]["codigo"]==codigo:
-                self.productos[count]["precio"]-=(self.productos[count]["precio"])/2
+                self.productos[count]["precio"]-=((self.productos[count]["precio"])*100/50)

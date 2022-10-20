@@ -1,5 +1,5 @@
 from aifc import Error
-from Trabajo_practico_Despegar import *
+from MacoWins import *
 
 def test_validar_elementos_en_producto():
     assert len(productos)>0 or len(productos)==0 and type(productos)==list
@@ -16,7 +16,7 @@ def test_actualizar_precios_por_categoria_inexistente():
     assert actualizar_precios_por_categoria("nn", 23)==None
 
 def test_actualizar_precios_por_categoria_existente_con_procentaje_en_string():
-    assert actualizar_precios_por_categoria("remera", "23") ==  ValueError("Pocentaje no recibe cadena de texto, solo numeros")
+    assert actualizar_precios_por_categoria("remera", "23") ==  ValueError
 
 def test_actualizar_precios_por_categoria_sin_tener_productos():
     reiniciar_productos()
@@ -27,13 +27,13 @@ def test_actualizar_precios_por_categoria_sin_tener_categoria_en_productos():
 
 def test_productos_mas_vendido_sin_productos():
     reiniciar_productos()
-    assert  productos_mas_vendidos()==TypeError
+    assert  productos_mas_vendidos()==[]
 def test_productos_mas_vendido_sin_ventas():
     reiniciar_ventas()
-    assert productos_mas_vendidos=={}
+    assert productos_mas_vendidos==[]
 
 def  test_productos_mas_vendido_lista_correcta():
-    assert productos_mas_vendidos()
+    assert productos_mas_vendidos()==productos_mas_vendidos()
 
 def test_cantidad_de_codigo_con_ventas_igual_a_cero():
     codigos_ordenados=[]
@@ -44,8 +44,8 @@ def test_cantidad_de_codigo_con_ventas_datos_string():
     assert cantidad_de_codigo_con_ventas(codigos_ordenados)=={}
 
 def test_cantidad_de_codigo_con_ventas_datos_existentes():
-    codigos_ordenados=[103,102,101]
-    assert cantidad_de_codigo_con_ventas(codigos_ordenados)=={101: 73, 102: 300, 103: 20}
+    codigos_ordenados_de_productos_decre=lista_de_codigos_productos(productos)
+    assert cantidad_de_codigo_con_ventas(codigos_ordenados_de_productos_decre)=={103: 20, 102: 300, 101: 73}
 
 def test_cantidad_de_codigo_con_ventas_datos_inexistentes():
     codigos_ordenados=[104,105,100]
