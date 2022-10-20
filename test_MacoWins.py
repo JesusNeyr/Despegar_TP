@@ -78,4 +78,3 @@ def test_discontinuar_productos_stock_negativo():
     reiniciar_productos()
     
     assert discontinuar_productos()==None
-asdasd
