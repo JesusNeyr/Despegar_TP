@@ -300,7 +300,9 @@ def productos_mas_vendidos(hasta=-1):
         return nombre_productos
     
 def actualizar_precios_por_categoria(categoria, porcentaje):
+
     global productos
+    
     if type(porcentaje)==int:
         for producto in productos:
             
@@ -336,6 +338,7 @@ def cambiar_dia(un_dia):
     dia=un_dia
 
 #Sprint3
+
 class Estado:
     def __init__(self, productos):    
         self.productos=productos
