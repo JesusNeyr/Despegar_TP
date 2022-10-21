@@ -2,7 +2,7 @@ ____________ DESPEGAR MACOWINS TRABAJO PRACTICO ____________
 
 --------------------- _ INTEGRANTES _ ---------------------
 
-Jesus Neyra Sotelo
+Jesus Neyra Sotelo Alino
 
 Tatiana  
 
