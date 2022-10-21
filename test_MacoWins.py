@@ -93,3 +93,35 @@ def test_lista_de_codigos_productos_sin_codigo():
     "precio": 4500,
     "stock": 0})
     assert lista_de_codigos_productos() == []
+
+def test_lista_de_codigos_productos_sin_venta():
+    reiniciar_ventas()
+
+    assert lista_de_codigos_ventas() == []
+
+def test_lista_de_codigos_ventas_sin_codigo():
+    reiniciar_ventas()
+    ventas.append({"cantidad": 20,
+    "fecha": "2022-09-24",
+    "precio": 4500})
+    assert lista_de_codigos_ventas() == []
+
+def test_codigo_de_producto_solicitado_en_productos_sin_productos():
+    reiniciar_productos()
+    assert codigo_de_producto_solicitado_en_productos(100) == False
+
+def test_codigo_de_producto_solicitado_en_productos_sin_parametro():
+    with pytest.raises(TypeError):
+        codigo_de_producto_solicitado_en_productos()
+
+# def test_posicion_de_elemento_en_productos_sin_productos():
+#     reiniciar_productos()
+#     codigo=1000
+#     with pytest.raises(ValueError) as exception_info:
+#         assert posicion_de_elemento_en_productos(codigo)
+
+def test_posicion_de_elemento_en_productos_existente():
+    assert posicion_de_elemento_en_productos(101) == 1
+    
+
+

@@ -91,13 +91,15 @@ def lista_de_codigos_productos():
         
     return sorted(codigos,reverse=True)
 
-def lista_de_codigos_ventas(ventas):
-    
+def lista_de_codigos_ventas():
+    global ventas
     codigos=[]
     
     if len(ventas)>0:
         
         [codigos.append(venta["codigo_producto"]) for venta in ventas]
+    else:
+        codigos=[]
     
     return codigos
 
@@ -321,23 +323,29 @@ def cargar_producto(un_producto):
     producto_nuevo=un_producto
 def reiniciar_productos():
     global productos
-    productos=[]
+    productos = []
+    return productos 
 
 def reiniciar_ventas():
     global ventas
     ventas=[]
+    return ventas
 def reiniciar_fecha():
     global fecha_anio_actual
     fecha_anio_actual=0
+    return fecha_anio_actual
 def cambiar_fecha(fecha_nueva):
     global fecha_anio_actual
     fecha_anio_actual=fecha_nueva
+    return fecha_anio_actual
 def reiniciar_dia():
     global dia
     dia=0
+    return dia
 def cambiar_dia(un_dia):
     global dia
     dia=un_dia
+    return dia
 
 #Sprint3
 
