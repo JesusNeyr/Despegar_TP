@@ -6,4 +6,4 @@ Jesus Neyra Sotelo Alino
 
 Tatiana  
 
-Juan
+Juan Carlos Vargas 
