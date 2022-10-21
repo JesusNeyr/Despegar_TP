@@ -80,3 +80,16 @@ def test_discontinuar_productos_stock_negativo():
     reiniciar_productos()
     
     assert discontinuar_productos()==None
+
+def test_lista_de_codigos_productos_sin_productos():
+    reiniciar_productos()
+    
+    assert lista_de_codigos_productos() == []
+
+def test_lista_de_codigos_productos_sin_codigo():
+    reiniciar_productos()
+    productos.append({"nombre": "short talle x",
+    "categoria": "remera",
+    "precio": 4500,
+    "stock": 0})
+    assert lista_de_codigos_productos() == []

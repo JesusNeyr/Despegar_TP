@@ -79,13 +79,15 @@ producto_nuevo={
   }
 
 
-def lista_de_codigos_productos(productos):
-    
+def lista_de_codigos_productos():
+    global productos
     codigos=[]
     
     if len(productos)>0:
         
-        [codigos.append(producto["codigo"]) for producto in productos]
+        [codigos.append(producto["codigo"]) for producto in productos if  "codigo" in producto]
+    else:
+        codigos=[]    
         
     return sorted(codigos,reverse=True)
 
@@ -103,19 +105,19 @@ def codigo_de_producto_solicitado_en_productos(codigo):
  
     global productos
     
-    return codigo in lista_de_codigos_productos(productos)
+    return codigo in lista_de_codigos_productos()
 
 def posicion_de_elemento_en_productos(codigo_de_producto):
     
     global productos
     
-    return lista_de_codigos_productos(productos).index(codigo_de_producto)
+    return lista_de_codigos_productos().index(codigo_de_producto)
     
 def registrar_producto(producto_nuevo):
     
     global productos
 
-    lista_codigos_de_productos=lista_de_codigos_productos(productos)
+    lista_codigos_de_productos=lista_de_codigos_productos()
     for producto in productos:
                 
             if producto_nuevo["codigo"]==producto["codigo"]:
@@ -146,7 +148,7 @@ def hay_stock(codigo_producto):
     
     global productos
     
-    lista_de_codigos=lista_de_codigos_productos(productos)
+    lista_de_codigos=lista_de_codigos_productos()
     
     posicion=posicion_de_elemento_en_productos(codigo_producto)
     
@@ -190,7 +192,7 @@ def realizar_compra(codigo_producto, cantidad):
     
     global ventas
     
-    lista_de_codigos = lista_de_codigos_productos(productos)
+    lista_de_codigos = lista_de_codigos_productos()
     
     posicion=posicion_de_elemento_en_productos(codigo_producto)
     
@@ -286,7 +288,7 @@ def productos_mas_vendidos(hasta=-1):
         
         raise ValueError("cantidad solicitada excedida")
     
-    codigos_ordenados_de_productos_decre=lista_de_codigos_productos(productos)
+    codigos_ordenados_de_productos_decre=lista_de_codigos_productos()
     
     cantidad_repetida_de_codigo_vendidos= cantidad_de_codigo_con_ventas(codigos_ordenados_de_productos_decre)
     
@@ -319,11 +321,11 @@ def cargar_producto(un_producto):
     producto_nuevo=un_producto
 def reiniciar_productos():
     global productos
-    productos={}
+    productos=[]
 
 def reiniciar_ventas():
     global ventas
-    ventas={}
+    ventas=[]
 def reiniciar_fecha():
     global fecha_anio_actual
     fecha_anio_actual=0
