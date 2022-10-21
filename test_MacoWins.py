@@ -1,5 +1,6 @@
 from aifc import Error
 from MacoWins import *
+import pytest
 
 def test_validar_elementos_en_producto():
     assert len(productos)>0 or len(productos)==0 and type(productos)==list
@@ -16,8 +17,9 @@ def test_actualizar_precios_por_categoria_inexistente():
     assert actualizar_precios_por_categoria("nn", 23)==None
 
 def test_actualizar_precios_por_categoria_existente_con_procentaje_en_string():
-    assert actualizar_precios_por_categoria("remera", "23") ==  ValueError
-
+    with pytest.raises(ValueError) as exception_info:
+        actualizar_precios_por_categoria("remera", "23")
+    assert str(exception_info.value)=="Porcentaje no recibe cadena de texto, solo numeros"
 def test_actualizar_precios_por_categoria_sin_tener_productos():
     reiniciar_productos()
     assert actualizar_precios_por_categoria("remera",10)== None

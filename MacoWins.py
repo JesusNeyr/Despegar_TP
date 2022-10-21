@@ -282,7 +282,7 @@ def productos_mas_vendidos(hasta=-1):
     
     global ventas
     
-    if str(len(ventas)) <= str(hasta):
+    if len(ventas) <= hasta:
         
         raise ValueError("cantidad solicitada excedida")
     
