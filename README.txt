@@ -4,6 +4,6 @@ ____________ DESPEGAR MACOWINS TRABAJO PRACTICO ____________
 
 Jesus Neyra Sotelo Alino
 
-Tatiana  
+Tatiana  Borgarelli
 
 Juan Carlos Vargas 
