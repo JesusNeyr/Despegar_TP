@@ -104,3 +104,64 @@ def test_lista_de_codigos_productos_sin_codigo():
     "precio": 4500,
     "stock": 0})
     assert lista_de_codigos_productos() == []
+
+def test_lista_de_codigos_productos_sin_venta():
+    reiniciar_ventas()
+
+    assert lista_de_codigos_ventas() == []
+
+def test_lista_de_codigos_ventas_sin_codigo():
+    reiniciar_ventas()
+    ventas.append({"cantidad": 20,
+    "fecha": "2022-09-24",
+    "precio": 4500})
+    assert lista_de_codigos_ventas() == []
+
+def test_codigo_de_producto_solicitado_en_productos_sin_productos():
+    reiniciar_productos()
+    assert codigo_de_producto_solicitado_en_productos(100) == False
+
+def test_codigo_de_producto_solicitado_en_productos_sin_parametro():
+    with pytest.raises(TypeError):
+        codigo_de_producto_solicitado_en_productos()
+
+def test_posicion_de_elemento_en_productos_sin_productos():
+    reiniciar_productos()
+    codigo={"codigo":1000}
+    agregar_producto_a_productos(codigo)
+    with pytest.raises(ValueError) as exception_info:
+        assert posicion_de_elemento_en_productos(codigo)
+
+def test_posicion_de_elemento_en_productos_existente():
+    # reiniciar_productos()
+    # producto= {"codigo":1011}
+    # registrar_producto(producto)
+    # producto_2= {"codigo":1021}
+    # registrar_producto(producto_2)
+    # assert posicion_de_elemento_en_productos(102) == 1
+    productos= []
+    productos.append({"codigo": 1123})
+    productos.append({"codigos": 1232})
+    assert posicion_de_elemento_en_productos(1232) == 1
+
+def test_posicion_de_elemento_en_productos_ultimo_codigo():
+    # reiniciar_productos()
+    # productos= [{"codigo": 101},{"codigo": 102},{"codigo": 103}]
+    # agregar_producto_a_productos({"codigo": 101})
+    agregar_producto_a_productos({"codigo": 103})
+    # agregar_producto_a_productos({"codigo": 103})
+    assert posicion_de_elemento_en_productos(103) == 2
+def test_agregar_producto_nuevo():
+    producto={"codigo":1000}
+    lonngitud = agregar_producto_a_productos(producto)
+    assert len(productos) == 5
+
+def test_agregar_producto_a_producto_vacio():
+    productos = []
+    productos.append({"codigo":1000})
+    assert len(productos) == 1
+
+def test_reiniciar_producto_en_productos_con_productos():
+    assert reiniciar_productos() == []
+
+
