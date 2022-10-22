@@ -80,7 +80,6 @@ producto_nuevo={
 
 
 def lista_de_codigos_productos():
-    global productos
     codigos=[]
     
     if len(productos)>0:
@@ -117,7 +116,6 @@ def posicion_de_elemento_en_productos(codigo_de_producto):
     
 def registrar_producto(producto_nuevo):
     
-    global productos
 
     lista_codigos_de_productos=lista_de_codigos_productos()
     for producto in productos:
@@ -346,6 +344,9 @@ def cambiar_dia(un_dia):
     global dia
     dia=un_dia
     return dia
+def agregar_producto_a_productos(producto):
+    global productos
+    productos.append(producto)
 
 #Sprint3
 
