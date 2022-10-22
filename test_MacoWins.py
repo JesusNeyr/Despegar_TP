@@ -298,3 +298,44 @@ def test_registrar_producto_ya_registrado():
     with pytest.raises(ValueError) as exception_info:
         registrar_producto(nuevo_2)
     assert str(exception_info.value)=="producto registrado"
+
+def test_recargar_stock_en_producto_no_disponible():
+    reiniciar_listas()
+    producto={"codigo":1,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000,"stock":123}
+    registrar_producto(producto)
+    with pytest.raises(ValueError) as exception_info:
+        recargar_stock(2,10)
+        assert str(exception_info.value)=="No se encuentra el producto"
+
+def test_recargar_stock_producto_disponible():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000,"stock":0}
+    registrar_producto(producto)
+    assert recargar_stock(100,2) == producto["stock": 2]
+
+def test_hay_stock_producto_con_stock_devulve_True():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000,"stock":0}
+    registrar_producto(producto)
+    recargar_stock(100,3)
+    assert hay_stock(100) == True
+
+def test_hay_stock_en_cero_devuelve_False():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000,"stock":0}
+    registrar_producto(producto)
+    assert hay_stock(100) == False
+
+
