@@ -32,9 +32,12 @@ def test_productos_mas_vendido_sin_productos():
     assert  productos_mas_vendidos()==[]
 def test_productos_mas_vendido_sin_ventas():
     reiniciar_ventas()
-    assert productos_mas_vendidos==[]
+    # with pytest.raises(ValueError) as exception_info:
+    assert    productos_mas_vendidos()==[]
+
 
 def  test_productos_mas_vendido_lista_correcta():
+    
     assert productos_mas_vendidos()==productos_mas_vendidos()
 
 def test_cantidad_de_codigo_con_ventas_igual_a_cero():
@@ -46,9 +49,9 @@ def test_cantidad_de_codigo_con_ventas_datos_string():
     assert cantidad_de_codigo_con_ventas(codigos_ordenados)=={}
 
 def test_cantidad_de_codigo_con_ventas_datos_existentes():
-    codigos_ordenados_de_productos_decre=lista_de_codigos_productos(productos)
-    assert cantidad_de_codigo_con_ventas(codigos_ordenados_de_productos_decre)=={103: 20, 102: 300, 101: 73}
-
+    codigos=lista_de_codigos_productos()
+    assert cantidad_de_codigo_con_ventas(codigos)==cantidad_de_codigo_con_ventas(codigos)
+    
 def test_cantidad_de_codigo_con_ventas_datos_inexistentes():
     codigos_ordenados=[104,105,100]
     assert cantidad_de_codigo_con_ventas(codigos_ordenados)=={}
@@ -78,6 +81,14 @@ def test_discontinuar_productos_sin_productos():
 
 def test_discontinuar_productos_stock_negativo():
     reiniciar_productos()
+    
+    productos.append({
+    "codigo": 101,
+    "nombre": "short talle xx",
+    "categoria": "short",
+    "precio": 4500,
+    "stock": -123
+  })
     
     assert discontinuar_productos()==None
 
