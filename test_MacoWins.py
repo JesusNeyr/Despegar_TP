@@ -1,9 +1,3 @@
-from aifc import Error
-from distutils.log import error
-from logging import exception
-from msilib.schema import RemoveIniFile
-from multiprocessing.sharedctypes import Value
-from sys import exc_info
 from MacoWins import *
 import pytest
 def reiniciar_listas():
@@ -238,9 +232,9 @@ def test_lista_de_codigos_ventas_sin_venta():
 #     realizar_venta({"nombre": "short talle xxx",
 #     "categoria": "short",
 #     "precio": 4500,"stock":400},300)
-#     with pytest.raises(ValueError) as exception_info:
-#         lista_de_codigos_ventas()
-#     assert str(exception_info.value)=="Codigo no encontrado"
+#     with pytest.raises(ValueError):
+#         assert lista_de_codigos_ventas()
+    
     
 
 def test_codigo_de_producto_solicitado_en_productos_sin_productos():
@@ -315,9 +309,10 @@ def test_recargar_stock_producto_disponible():
     producto={"codigo":100,
     "nombre": "short talle xxxx",
     "categoria": "remera",
-    "precio": 5000,"stock":0}
+    "precio": 5000}
     registrar_producto(producto)
-    assert recargar_stock(100,2) == producto["stock": 2]
+    recargar_stock(100,2) 
+    assert producto["stock"] == 2
 
 def test_hay_stock_producto_con_stock_devulve_True():
     reiniciar_listas()
@@ -337,5 +332,102 @@ def test_hay_stock_en_cero_devuelve_False():
     "precio": 5000,"stock":0}
     registrar_producto(producto)
     assert hay_stock(100) == False
+
+def test_calcular_precio_final_si_precio_es_mayor_70_y_extranjero():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000,"stock":10}
+    registrar_producto(producto)
+    assert calcular_precio_final(producto, True) == 5000
+
+def test_calcular_precio_final_si_precio_es_mayor_70_y_not_extranjero():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000,"stock":10}
+    registrar_producto(producto)
+    assert calcular_precio_final(producto, False) == 6050
+
+def test_contar_categorias_de_2_categoria_en_la_lista():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000}
+    producto_nuevo={"codigo":101,
+    "nombre": "short talle xxxx",
+    "categoria": "short",
+    "precio": 5000}
+    registrar_producto(producto)
+    registrar_producto(producto_nuevo)
+    assert contar_categorias(productos) == 2
+
+def test_contar_categorias_de_0_categoria_en_la_lista():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "precio": 5000}
+    producto_nuevo={"codigo":101,
+    "nombre": "short talle xxxx",
+    "precio": 5000}
+    registrar_producto(producto)
+    registrar_producto(producto_nuevo)
+    with pytest.raises(ValueError) as exception_info:
+        assert str(exception_info.value)== 'categoria'
+
+def test_realizar_venta_de_un_producto():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000}  
+    registrar_producto(producto)
+    recargar_stock(100,10)
+    realizar_venta(producto,1)
+    assert  producto["codigo"] == ventas[0]["codigo_producto"]
+def test_realizar_venta_de_un_producto_con_codigo_inexistente():
+    reiniciar_listas()
+    producto={"codigo":-1,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000,
+    "stock": 1}  
+    registrar_producto(producto)
+    with pytest.raises(ValueError) as exception_info:
+            realizar_venta(producto,1)
+    assert str(exception_info.value)=="Codigo no encontrado"
+
+
+def test_realizar_compra_de_un_producto():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000}
+    registrar_producto(producto)
+    recargar_stock(100,10)
+    realizar_compra(100,1)
+    assert producto["stock"] == 9
+
+def realizar_compra_de_un_producto_sin_stock():
+    reiniciar_listas()
+    producto={"codigo":100,
+    "nombre": "short talle xxxx",
+    "categoria": "remera",
+    "precio": 5000}
+    registrar_producto(producto)
+    with pytest.raises(ValueError) as exception_info:
+        realizar_compra(100,1)
+        assert str(exception_info.value)=="No hay stock Disponible, cantidad dispoble de " + str(productos[posicion]["stock"])
+    
+
+
+
+
+
+
 
 

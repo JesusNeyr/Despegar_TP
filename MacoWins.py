@@ -12,9 +12,7 @@ productos = [
 
 ]
 
-ventas = [
-  
-]
+ventas = []
     # {
     # "codigo_producto": 103,
     # "cantidad": 20,
@@ -23,9 +21,19 @@ ventas = [
     #   },
  
 
-producto_nuevo={
+producto_nuevo={"codigo": 100,
+    "nombre": "remera talle m",
+    "categoria": "remera",
+    "precio": 4500,
+    "stock": 10
 }
+producto_nuevo_2 ={"codigo":122,
+ "nombre": "remera talle m",
+ "categoria": "remera",
+ "precio": 4500,
+ 
 
+}
 
 def lista_de_codigos_productos():
     codigos=[]
@@ -68,6 +76,8 @@ def registrar_producto(producto_nuevo):
                 
              if producto_nuevo["codigo"]==producto["codigo"]:
                  raise ValueError("producto registrado")
+        producto_nuevo["stock"]=0
+        productos.append(producto_nuevo)
 
 def recargar_stock(codigo_producto, cantidad):
     
