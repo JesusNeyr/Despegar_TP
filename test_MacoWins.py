@@ -26,9 +26,6 @@ def test_validar_elementos_en_producto():
 def test_validar_elementos_en_ventas():
     assert len(ventas)>0 or len(ventas)==0 and type(productos)==list
 
-def test_validar_producto_nuevo():
-    assert "stock" not in producto_nuevo
-
 def test_actualizar_precios_por_categoria_existente():
     reiniciar_listas()
     
@@ -375,8 +372,9 @@ def test_contar_categorias_de_0_categoria_en_la_lista():
     "precio": 5000}
     registrar_producto(producto)
     registrar_producto(producto_nuevo)
-    with pytest.raises(ValueError) as exception_info:
-        assert str(exception_info.value)== 'categoria'
+    assert contar_categorias(productos)==0
+    # with pytest.raises(ValueError) as exception_info:
+    #     assert str(exception_info.value)== 'categoria'
 
 def test_realizar_venta_de_un_producto():
     reiniciar_listas()
@@ -421,7 +419,7 @@ def realizar_compra_de_un_producto_sin_stock():
     registrar_producto(producto)
     with pytest.raises(ValueError) as exception_info:
         realizar_compra(100,1)
-        assert str(exception_info.value)=="No hay stock Disponible, cantidad dispoble de " + str(productos[posicion]["stock"])
+    assert str(exception_info.value)=="No hay stock Disponible, cantidad dispoble de " + str(productos[posicion]["stock"])
     
 
 

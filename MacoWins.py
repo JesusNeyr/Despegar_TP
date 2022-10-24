@@ -119,13 +119,16 @@ def calcular_precio_final(un_producto, es_extranjero):
 def contar_categorias(productos):
     
     categorias_unicas=[]
-    
+    for producto in productos:
+        if "categoria" not in producto:
+            return 0
+
     [categorias_unicas.append(producto["categoria"]) for producto in productos if producto["categoria"] not in categorias_unicas]
     
     return len(categorias_unicas)
 
 def realizar_venta(producto_vendido,cantidad):
-    if "codigo"  in producto_vendido:
+    if "codigo"  in producto_vendido and producto_vendido["codigo"]>0:
         ventas.append( {
             
                     "codigo_producto": producto_vendido["codigo"],
