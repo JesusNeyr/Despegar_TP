@@ -410,15 +410,17 @@ def test_realizar_compra_de_un_producto():
     realizar_compra(100,1)
     assert producto["stock"] == 9
 
-def realizar_compra_de_un_producto_sin_stock():
+def test_realizar_compra_de_un_producto_sin_stock():
     reiniciar_listas()
     producto={"codigo":100,
     "nombre": "short talle xxxx",
     "categoria": "remera",
     "precio": 5000}
     registrar_producto(producto)
+    posicion=posicion_de_codigo_ordenado_decre_de_productos(100)
     with pytest.raises(ValueError) as exception_info:
-        realizar_compra(100,1)
+        realizar_compra(100,12)
+   
     assert str(exception_info.value)=="No hay stock Disponible, cantidad dispoble de " + str(productos[posicion]["stock"])
     
 

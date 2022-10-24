@@ -13,27 +13,7 @@ productos = [
 ]
 
 ventas = []
-    # {
-    # "codigo_producto": 103,
-    # "cantidad": 20,
-    # "fecha": "2022-09-24",
-    # "precio": 4500
-    #   },
- 
 
-producto_nuevo={"codigo": 100,
-    "nombre": "remera talle m",
-    "categoria": "remera",
-    "precio": 4500,
-    "stock": 10
-}
-producto_nuevo_2 ={"codigo":122,
- "nombre": "remera talle m",
- "categoria": "remera",
- "precio": 4500,
- 
-
-}
 
 def lista_de_codigos_productos():
     codigos=[]
